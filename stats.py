@@ -10,3 +10,28 @@ def char_count(book_text):
         else:
             char_list[char] = 1
     return char_list
+
+def report(char_count):
+    alpha_dict = {}
+    for char, count in char_count.items():
+        if char.isalpha():
+            alpha_dict[char] = count
+
+    char_dictionaries = []
+    for char, count in alpha_dict.items():
+        char_dict = {"char": char, "num": count}
+        char_dictionaries.append(char_dict)
+    
+    char_dictionaries.sort(reverse=True, key=lambda item: item["num"])
+
+    return char_dictionaries
+
+def print_report(word_count, char_count, filepath ):
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {filepath}")
+    print("----------- Word Count ----------")
+    print(f"Found {word_count} total words")
+    print("--------- Character Count -------")
+    for item in report(char_count):
+        print(f"{item['char']}: {item['num']}")
+    print("============= END ===============")
